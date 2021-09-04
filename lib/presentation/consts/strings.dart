@@ -1,0 +1,5 @@
+import 'package:flutter/material.dart';
+
+String mainApi = "https://poshikstore.ir/api/";
+String apiToken =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1MTliMzU5MDczMjY0Mjc2YThlNzA4ZDk0ZGQ0M2NiYiIsInJvbGUiOiJBZG1pbiIsIm5iZiI6MTYyODg4MTQ0MywiZXhwIjoxNjI4ODg1MDQzLCJpYXQiOjE2Mjg4ODE0NDMsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6NTAwMC8iLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjUwMDAvIn0.v08SXL1XRvso_a9e9JQH4-UPWeTJmrl2xENIIrFe5KQ";
