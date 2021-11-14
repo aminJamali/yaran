@@ -12,11 +12,13 @@ import 'package:moordak/presentation/consts/strings.dart';
 import 'package:moordak/presentation/screens/drawer.dart';
 import 'package:moordak/presentation/screens/transactions_screens/details_transaction.dart';
 import 'package:moordak/presentation/screens/transactions_screens/edit_transaction.dart';
-import 'package:moordak/presentation/view_models/transaction_view_model.dart';
+import 'package:moordak/presentation/list_items/transaction_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 class TransactionsScreen extends StatefulWidget {
+  final String userId;
+  TransactionsScreen({this.userId});
   @override
   _TransactionsScreenState createState() => _TransactionsScreenState();
 }
@@ -65,6 +67,7 @@ class _TransactionsScreenState extends State<TransactionsScreen>
               new TransactionGetDto(
                 apiToken: _preferences.getString('apiToken'),
                 pageNumber: _pageNumber++,
+                userId: widget.userId != null ? widget.userId : null,
               ),
             ),
           );
@@ -149,7 +152,7 @@ class _TransactionsScreenState extends State<TransactionsScreen>
           }
           return Scaffold(
               appBar: _appBarList[_currentAppBar],
-              floatingActionButton: _floatingActionButton(context),
+              floatingActionButton: _floatingActionButton(),
               key: _scaffoldKey,
               body: new RefreshIndicator(
                 child: _isLoading == true && _finalTransactions.length == 0
@@ -175,21 +178,18 @@ class _TransactionsScreenState extends State<TransactionsScreen>
                                       _onItemLongPressed(
                                           context,
                                           new TransactionAddDto(
-                                            id: _finalTransactions[index].id,
-                                            apiToken: apiToken,
-                                            imageArray:
-                                                _finalTransactions[index]
-                                                    .imgFileUrls,
-                                            isCharity: _finalTransactions[index]
-                                                .isCharity,
-                                            payDate: _finalTransactions[index]
-                                                .payDate,
-                                            payVal: double.parse(
-                                              _finalTransactions[index]
-                                                  .payVal
-                                                  .toString(),
-                                            ),
-                                          ));
+                                              id: _finalTransactions[index].id,
+                                              apiToken: apiToken,
+                                              imageArray:
+                                                  _finalTransactions[index]
+                                                      .imgFileUrls,
+                                              isCharity:
+                                                  _finalTransactions[index]
+                                                      .isCharity,
+                                              payDate: _finalTransactions[index]
+                                                  .payDate,
+                                              payVal: _finalTransactions[index]
+                                                  .payVal));
                                     });
                               },
                             ),
@@ -370,6 +370,28 @@ class _TransactionsScreenState extends State<TransactionsScreen>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  Widget _floatingActionButton() {
+    return new FloatingActionButton(
+      onPressed: () {
+        Navigator.pushNamed(context, '/transaction_add_page').then(
+          (value) => _transactionBloc.add(
+            new GetAllTransactionsEvent(
+              new TransactionGetDto(
+                apiToken: _preferences.getString('apiToken'),
+                pageNumber: _pageNumber = 0,
+              ),
+            ),
+          ),
+        );
+      },
+      backgroundColor: maincolor,
+      child: new Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
+    );
+  }
 }
 
 _onItemClicked(context, TransactionModel _transactionItem) {
@@ -382,19 +404,6 @@ _onItemClicked(context, TransactionModel _transactionItem) {
           transactionModel: _transactionItem,
         ),
       ),
-    ),
-  );
-}
-
-Widget _floatingActionButton(context) {
-  return new FloatingActionButton(
-    onPressed: () {
-      Navigator.pushNamed(context, '/transaction_add_page');
-    },
-    backgroundColor: maincolor,
-    child: new Icon(
-      Icons.add,
-      color: Colors.white,
     ),
   );
 }

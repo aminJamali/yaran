@@ -15,7 +15,7 @@ import 'package:moordak/presentation/screens/drawer.dart';
 import 'package:moordak/presentation/screens/installment_screens/loan_installments_screen.dart';
 import 'package:moordak/presentation/screens/loan_screen/edit_loan_screen.dart';
 import 'package:moordak/presentation/screens/loan_screen/loan_details.dart';
-import 'package:moordak/presentation/view_models/loan_view_model.dart';
+import 'package:moordak/presentation/list_items/loan_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 

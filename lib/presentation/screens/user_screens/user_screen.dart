@@ -5,11 +5,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moordak/data/dtos/user_dtos/get_user_info_dto.dart';
 import 'package:moordak/data/dtos/user_dtos/user_register_dto.dart';
 import 'package:moordak/data/models/user_model.dart';
+import 'package:moordak/logic/blocs/transaction_bloc/transaction_bloc.dart';
 import 'package:moordak/logic/blocs/user_bloc/user_bloc.dart';
 import 'package:moordak/presentation/consts/colors.dart';
 import 'package:moordak/presentation/screens/drawer.dart';
+import 'package:moordak/presentation/screens/transactions_screens/transaction_screen.dart';
 import 'package:moordak/presentation/screens/user_screens/details_user.dart';
-import 'package:moordak/presentation/view_models/user_view_model.dart';
+import 'package:moordak/presentation/list_items/user_view_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserScreen extends StatefulWidget {
@@ -145,6 +147,9 @@ class _UserScreenState extends State<UserScreen>
                           itemCount: _finalUsers.length,
                           itemBuilder: (context, index) {
                             return new UserViewModel(
+                              onItemPressed: () {
+                                _onItemLongPressed(_finalUsers[index].id);
+                              },
                               userModel: _finalUsers[index],
                               onItemClicked: () {
                                 _onItemClicked(_finalUsers[index]);
@@ -255,7 +260,7 @@ class _UserScreenState extends State<UserScreen>
     );
   }
 
-  _onItemLongPressed(UserRegisterDto userRegisterDto) {
+  _onItemLongPressed(String userId) {
     return showDialog(
         context: context,
         barrierDismissible: true,
@@ -264,15 +269,26 @@ class _UserScreenState extends State<UserScreen>
             children: <Widget>[
               new MaterialButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.pushNamed(context, '/user_edit_page');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BlocProvider(
+                          create: (BuildContext context) => TransactionBloc(),
+                          child: Directionality(
+                            textDirection: TextDirection.rtl,
+                            child: TransactionsScreen(
+                              userId: userId,
+                            ),
+                          ),
+                        ),
+                      ));
                 },
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    new Icon(Icons.edit, color: Colors.green),
+                    new Icon(Icons.list, color: Colors.green),
                     new Text(
-                      'تغییر کاربر',
+                      'سوابق پرداخت',
                       style: new TextStyle(
                         fontSize: 16,
                         color: maincolor,
@@ -280,7 +296,7 @@ class _UserScreenState extends State<UserScreen>
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           );
         });

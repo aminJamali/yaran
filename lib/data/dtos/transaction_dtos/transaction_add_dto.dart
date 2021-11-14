@@ -2,7 +2,7 @@ import 'dart:io';
 
 class TransactionAddDto {
   final int id;
-  final double payVal;
+  final int payVal;
   final String payDate, userId;
   final bool isCharity;
   final List<dynamic> imageArray;

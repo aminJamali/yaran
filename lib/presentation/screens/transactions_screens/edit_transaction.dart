@@ -178,7 +178,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
             imageArray: _images,
             id: widget.transactionAddDto.id,
             apiToken: _apiToken,
-            payVal: _transactionVal.toDouble(),
+            payVal: _transactionVal,
           );
           _transactionBloc.add(
             new EditTransactionEvent(transactionAddDto),

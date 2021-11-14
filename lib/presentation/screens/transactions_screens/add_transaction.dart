@@ -145,7 +145,7 @@ class _AddTransactionState extends State<AddTransaction> {
             imageArray: _images,
             apiToken: _apiToken,
             userId: _selectedUser,
-            payVal: _transactionVal.toDouble(),
+            payVal: _transactionVal,
           );
           _transactionBloc.add(
             new AddTransactionEvent(transactionAddDto),
