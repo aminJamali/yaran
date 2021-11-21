@@ -68,7 +68,7 @@ class _TransactionsScreenState extends State<TransactionsScreen>
               new TransactionGetDto(
                 apiToken: _preferences.getString('apiToken'),
                 pageNumber: _pageNumber++,
-                userId: widget.userId != null ? widget.userId : null,
+                userId: widget.userId ?? null,
               ),
             ),
           );
@@ -247,6 +247,7 @@ class _TransactionsScreenState extends State<TransactionsScreen>
           apiToken: _preferences.getString('apiToken'),
           pageNumber: _pageNumber,
           search: searchText,
+          userId: widget.userId ?? null,
         ),
       ),
     );
