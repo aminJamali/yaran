@@ -83,6 +83,14 @@ class _LoanScreenState extends State<LoanScreen>
           onTap: () {
             setState(() {
               _currentAppBar = 'mainAppBar';
+              _loanBloc.add(
+                GetAllLoansEvent(
+                  new GetLoanDto(
+                    apiToken: _preferences.getString('apiToken'),
+                    pageNumber: _pageNumber++,
+                  ),
+                ),
+              );
             });
           }),
     );

@@ -87,6 +87,15 @@ class _TransactionsScreenState extends State<TransactionsScreen>
           onTap: () {
             setState(() {
               _currentAppBar = 'mainAppBar';
+              _transactionBloc.add(
+                GetAllTransactionsEvent(
+                  new TransactionGetDto(
+                    apiToken: _preferences.getString('apiToken'),
+                    pageNumber: _pageNumber++,
+                    userId: widget.userId ?? null,
+                  ),
+                ),
+              );
             });
           }),
     );

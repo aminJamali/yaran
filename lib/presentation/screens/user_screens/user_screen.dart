@@ -68,6 +68,14 @@ class _UserScreenState extends State<UserScreen>
           onTap: () {
             setState(() {
               _currentAppBar = 'mainAppBar';
+              _userBloc.add(
+                new GetAllUsersEvent(
+                  new GetUserInfoDto(
+                    apiToken: _preferences.getString('apiToken'),
+                    pageNumber: _pageNumber++,
+                  ),
+                ),
+              );
             });
           }),
     );
