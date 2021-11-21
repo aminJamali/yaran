@@ -423,7 +423,16 @@ class _LoanScreenState extends State<LoanScreen>
   Widget _buildFloatingActionButton() {
     return new FloatingActionButton(
       onPressed: () {
-        Navigator.pushNamed(context, '/loan_add_page');
+        Navigator.pushNamed(context, '/loan_add_page').then(
+          (value) => _loanBloc.add(
+            new GetAllLoansEvent(
+              new GetLoanDto(
+                apiToken: _preferences.getString('apiToken'),
+                pageNumber: _pageNumber = 0,
+              ),
+            ),
+          ),
+        );
       },
       backgroundColor: maincolor,
       child: new Icon(Icons.add, color: Colors.white),

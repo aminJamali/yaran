@@ -44,6 +44,7 @@ class _TransactionsScreenState extends State<TransactionsScreen>
         new TransactionGetDto(
           apiToken: _preferences.getString('apiToken'),
           pageNumber: _pageNumber,
+          userId: widget.userId ?? null,
         ),
       ),
     );
@@ -97,12 +98,19 @@ class _TransactionsScreenState extends State<TransactionsScreen>
         ),
       ),
       elevation: 5,
-      leading: new IconButton(
-        onPressed: () {
-          DrawerScreenState.drawerKey.currentState.openDrawer();
-        },
-        icon: Icon(Icons.menu),
-      ),
+      leading: widget.userId == null
+          ? new IconButton(
+              onPressed: () {
+                DrawerScreenState.drawerKey.currentState.openDrawer();
+              },
+              icon: Icon(Icons.menu),
+            )
+          : new IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back),
+            ),
       backgroundColor: maincolor,
       actions: [
         Row(

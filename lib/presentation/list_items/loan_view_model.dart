@@ -13,7 +13,6 @@ class LoanViewModel extends StatelessWidget {
     return Column(
       children: [
         new ListTile(
-          onLongPress: onItemLongPressed,
           onTap: onItemClicked,
           title: Row(
             children: [
@@ -24,8 +23,23 @@ class LoanViewModel extends StatelessWidget {
               _isFinished(),
             ],
           ),
-          subtitle: _price(),
-          trailing: _getDate(),
+          trailing: new IconButton(
+            onPressed: onItemLongPressed,
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _price(),
+              _getDate(),
+            ],
+          ),
         ),
         new Divider(
           height: 4,

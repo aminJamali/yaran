@@ -17,7 +17,13 @@ class UserViewModel extends StatelessWidget {
           title: _title(),
           onTap: onItemClicked,
           subtitle: _position(),
-          onLongPress: onItemPressed,
+          trailing: new IconButton(
+            onPressed: onItemPressed,
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+          ),
         ),
         new Divider(
           height: 4,

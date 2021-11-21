@@ -19,7 +19,6 @@ class TransactionViewModel extends StatelessWidget {
     return Column(
       children: [
         new ListTile(
-          onLongPress: onItemLongPressed,
           onTap: onItemClicked,
           title: Row(
             children: [
@@ -30,8 +29,23 @@ class TransactionViewModel extends StatelessWidget {
               _isCharity(),
             ],
           ),
-          subtitle: _price(),
-          trailing: _date(),
+          trailing: new IconButton(
+            onPressed: onItemLongPressed,
+            icon: Icon(
+              Icons.more_vert,
+              color: Colors.black,
+            ),
+          ),
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 15),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _price(),
+              _date(),
+            ],
+          ),
         ),
         new Divider(
           height: 4,

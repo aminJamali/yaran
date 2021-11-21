@@ -246,7 +246,7 @@ class MourdakApi {
     };
     try {
       final response = await http.get(
-        '${mainApi}routine-payments?limit=${20}&offset=${transactionGetDto.pageNumber}&userId=${transactionGetDto.userId != null ? transactionGetDto.userId : ""}',
+        '${mainApi}routine-payments?limit=${20}&offset=${transactionGetDto.pageNumber}&userId=${transactionGetDto.userId ?? ""}',
         headers: requestHeaders,
       );
       print(response.body);
