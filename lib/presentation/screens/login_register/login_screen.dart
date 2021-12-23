@@ -21,6 +21,7 @@ final _formKey = GlobalKey<FormState>();
 GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
 UserBloc _userBloc;
 bool _isLoading;
+SharedPreferences _preferences;
 
 class _LoginScreenState extends State<LoginScreen> {
   AnimationController _loginButtonController;
@@ -29,6 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
 
     _userBloc = BlocProvider.of<UserBloc>(context);
+    _checkRememberMe();
   }
 
   @override
@@ -106,16 +108,18 @@ class _LoginScreenState extends State<LoginScreen> {
     _isLoading = false;
     print("here api token ${apiToken}");
     if (apiToken != null && apiToken != "WrongUserOrPassword") {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('apiToken', apiToken);
-
+      _preferences.setString('apiToken', apiToken);
+      _preferences.setString('userName', _userNameController.text);
+      _preferences.setString('password', _passWordController.text);
+      _userNameController.clear();
+      _passWordController.clear();
       Navigator.pushReplacementNamed(context, '/drawer');
     } else if (apiToken == "WrongUserOrPassword") {
       Toast.show("نام کاربری یا رمزعبور اشتباه", context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
     } else {
       Toast.show("عملیات ناموفق بود", context,
-          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+          duration: Toast.LENGTH_LONG, gravity: Toast.TOP);
     }
   }
 
@@ -184,5 +188,16 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     ));
+  }
+
+  void _checkRememberMe() async {
+    _preferences = await SharedPreferences.getInstance();
+    if (_preferences.getString('userName') != null &&
+        _preferences.getString('password') != null) {
+      setState(() {
+        _userNameController.text = _preferences.getString('userName');
+        _passWordController.text = _preferences.getString('password');
+      });
+    }
   }
 }

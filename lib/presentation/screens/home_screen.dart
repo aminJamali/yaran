@@ -66,10 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           _showUsers(),
-                          _showTransactions(),
+                          _showCharity(),
                         ],
                       ),
-                      _showCharity(),
+                      _showTransactions(),
                       _monthTransactions(),
                     ],
                   ),
@@ -104,28 +104,32 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {},
       child: Card(
         color: Colors.greenAccent[400],
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.white70, width: 1),
+          borderRadius: BorderRadius.circular(20),
+        ),
         child: new Container(
           margin: EdgeInsets.all(5),
-          width: MediaQuery.of(context).size.width,
+          width: MediaQuery.of(context).size.width * .45,
           height: MediaQuery.of(context).size.height * 0.2,
           child: new Column(
             children: [
+              new Icon(
+                CupertinoIcons.moon_stars,
+                color: Colors.white,
+                size: 40,
+              ),
+              new Container(
+                margin: EdgeInsets.only(top: 15),
+              ),
               new Text(
                 '${_dashBoardModel.charityPrice.toString().seRagham()} ریال پرداخت خیریه',
                 style: new TextStyle(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              new Container(
-                margin: EdgeInsets.only(top: 30),
-              ),
-              new Icon(
-                CupertinoIcons.moon_stars,
-                color: Colors.white,
-                size: 50,
-              )
             ],
           ),
         ),
@@ -135,7 +139,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _monthTransactions() {
     return new InkWell(
-      onTap: () {},
+      onTap: () {
+        _preferences.remove('apiToken');
+      },
       child: Card(
         color: Colors.red[400],
         child: new Container(
@@ -172,23 +178,15 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Card(
         shape: RoundedRectangleBorder(
           side: BorderSide(color: Colors.white70, width: 1),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(5),
         ),
         color: Colors.deepPurple[400],
         child: new Container(
           margin: EdgeInsets.all(5),
-          width: MediaQuery.of(context).size.width * .45,
+          width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.2,
           child: new Column(
             children: [
-              new Icon(
-                CupertinoIcons.money_dollar_circle,
-                color: Colors.white,
-                size: 40,
-              ),
-              new Container(
-                margin: EdgeInsets.only(top: 30),
-              ),
               new Text(
                 '${_dashBoardModel.totalPrice.toString().seRagham()} ریال پرداخت کلی',
                 style: new TextStyle(
@@ -196,6 +194,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+              new Container(
+                margin: EdgeInsets.only(top: 30),
+              ),
+              new Icon(
+                CupertinoIcons.money_dollar_circle,
+                color: Colors.white,
+                size: 50,
               ),
             ],
           ),

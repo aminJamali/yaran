@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class UserModel {
+  int totalPayment;
   String id,
       nationalCode,
       mobileNumber,
@@ -15,6 +16,7 @@ class UserModel {
       this.mobileNumber,
       this.countryCallingCode,
       this.userName,
+      this.totalPayment,
       this.firstName,
       this.lastName});
 
@@ -27,6 +29,7 @@ class UserModel {
       userName: json['userName'],
       firstName: json['firstName'],
       lastName: json['lastName'],
+      totalPayment: json['totalPayment'],
     );
   }
 }

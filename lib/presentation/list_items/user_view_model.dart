@@ -11,25 +11,34 @@ class UserViewModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
-      children: [
-        new ListTile(
-          title: _title(),
-          onTap: onItemClicked,
-          subtitle: _position(),
-          trailing: new IconButton(
-            onPressed: onItemPressed,
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.black,
+    return InkWell(
+      onTap: onItemClicked,
+      child: Column(
+        children: [
+          new ListTile(
+            title: _title(),
+            subtitle: _position(),
+            trailing: new IconButton(
+              onPressed: onItemPressed,
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.black,
+              ),
             ),
           ),
-        ),
-        new Divider(
-          height: 4,
-          color: Colors.grey[400],
-        ),
-      ],
+          Container(
+            margin: EdgeInsets.only(right: 15),
+            alignment: Alignment.centerRight,
+            child: Text(
+              'پرداخت کل: ${userModel.totalPayment}',
+            ),
+          ),
+          new Divider(
+            height: 4,
+            color: Colors.grey[400],
+          ),
+        ],
+      ),
     );
   }
 

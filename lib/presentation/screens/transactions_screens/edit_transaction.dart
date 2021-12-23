@@ -55,13 +55,13 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     _imagesAssets.clear();
     _transactionBloc = BlocProvider.of<TransactionBloc>(this.context);
     _imagesAssets.clear();
-    if (widget.transactionAddDto.imageArray.length > 0) {
-      widget.transactionAddDto.imageArray.forEach((element) async {
-        File file = await urlToFile(element);
-        Asset asset = await fileToAsset(file);
-        _imagesAssets.add(asset);
-      });
-    }
+    // if (widget.transactionAddDto.imageArray.length > 0) {
+    //   widget.transactionAddDto.imageArray.forEach((element) async {
+    //     File file = await urlToFile(element);
+    //     Asset asset = await fileToAsset(file);
+    //     _imagesAssets.add(asset);
+    //   });
+    // }
     _fillTheForm();
   }
 
