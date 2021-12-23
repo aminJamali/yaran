@@ -28,11 +28,6 @@ class _DetailsTransactionScreenState extends State<DetailsTransactionScreen> {
         padding: EdgeInsets.all(5),
         child: new Column(
           children: [
-            _transactionModel.imgFileUrls.length > 0
-                ? ImageSlider(
-                    imgList: _transactionModel.imgFileUrls,
-                  )
-                : Container(),
             new Lable(
               title: 'نام :',
               description:

@@ -140,6 +140,7 @@ class _EditTransactionScreenState extends State<EditTransactionScreen> {
     _isLoading = false;
     if (isSuccessed == true) {
       Toast.show('تراکنش با موفقیت تغییر کرد', context);
+      Navigator.pop(context);
     } else {
       Toast.show('عملیات ناموفق', context);
     }

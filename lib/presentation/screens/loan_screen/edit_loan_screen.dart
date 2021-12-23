@@ -119,7 +119,9 @@ class _EditLoanScreenState extends State<EditLoanScreen> {
       _installmentCount.clear();
       _installmentMonthPeriod.clear();
       _loanValController.clear();
+
       _isFinished = false;
+      Navigator.pop(context);
     } else {
       Toast.show('عملیات ناموفق', context);
     }

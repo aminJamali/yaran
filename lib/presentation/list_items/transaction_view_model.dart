@@ -16,42 +16,44 @@ class TransactionViewModel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return Column(
-      children: [
-        new ListTile(
-          onTap: onItemClicked,
-          title: Row(
-            children: [
-              _title(),
-              new SizedBox(
-                width: 30,
+    return InkWell(
+      onTap: onItemClicked,
+      child: Column(
+        children: [
+          new ListTile(
+            title: Row(
+              children: [
+                _title(),
+                new SizedBox(
+                  width: 30,
+                ),
+                _isCharity(),
+              ],
+            ),
+            trailing: new IconButton(
+              onPressed: onItemLongPressed,
+              icon: Icon(
+                Icons.more_vert,
+                color: Colors.black,
               ),
-              _isCharity(),
-            ],
-          ),
-          trailing: new IconButton(
-            onPressed: onItemLongPressed,
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.black,
             ),
           ),
-        ),
-        Container(
-          margin: const EdgeInsets.symmetric(horizontal: 15),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _price(),
-              _date(),
-            ],
+          Container(
+            margin: const EdgeInsets.symmetric(horizontal: 15),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _price(),
+                _date(),
+              ],
+            ),
           ),
-        ),
-        new Divider(
-          height: 4,
-          color: Colors.grey[400],
-        ),
-      ],
+          new Divider(
+            height: 4,
+            color: Colors.grey[400],
+          ),
+        ],
+      ),
     );
   }
 
