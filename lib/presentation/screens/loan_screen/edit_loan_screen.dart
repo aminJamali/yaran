@@ -112,6 +112,7 @@ class _EditLoanScreenState extends State<EditLoanScreen> {
   _editLoan(bool isSuccessed) {
     if (isSuccessed == true) {
       Toast.show('با موفقیت تغییر کرد', context);
+
       _formKey.currentState.reset();
       _typeAheadController.clear();
 
